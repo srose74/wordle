@@ -73,10 +73,11 @@ row6.addEventListener('change', (event) => {
     if (guess){
         updateClues(compareWords(guess, wordleWord), row);
     }
+
 });
 
 //Gets the Wordle Guess from the Wordle Interface
-//Pass in the row of the wordle to check
+//Pass in the row of the wordle to get the correct round
 function getWordleGuess(row){
     
     //creates an array to capture the guess
@@ -100,6 +101,7 @@ function getWordleGuess(row){
 
 //updates the colour of the boxes on the wordle input based on the result of the compare function 
 function updateClues(result, row){
+    
     //count the number of correct letters
     let winner = 0;
 
@@ -109,6 +111,7 @@ function updateClues(result, row){
         //get the input box
         let box = document.getElementById(id);
         
+        //depending on the results from the compare word function, update coloured squares
         if(result[i].inPosition){
             box.setAttribute('class', 'green');
             winner++;
@@ -125,6 +128,9 @@ function updateClues(result, row){
         } else {
             alert('You have won in ' + row + ' rounds.');
         }
+    //if you get to round 6 and you still haven't won, show the player the Wordle Word    
+    } else if (row === '6'){
+        alert ('The Wordle word was ' + wordleWord);
     }
 }
 
