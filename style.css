@@ -101,6 +101,22 @@ img {
     border-radius: 10px;
 }
 
+.key-green{
+    width: 50px;
+    height: 70px;
+    font-size: 20px;
+    background-color: #6cac64;
+    color: black;
+    border-radius: 10px;
+}
+.key-grey{
+    width: 50px;
+    height: 70px;
+    font-size: 20px;
+    background-color: gray;
+    color: black;
+    border-radius: 10px;
+}
 
 
 

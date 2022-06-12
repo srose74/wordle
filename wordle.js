@@ -15,15 +15,17 @@ for (let keyElement of keys){
                 let guess = getWordleGuess(row);
 
                 if (guess){
+
+                    //increment row by 1
                     row = updateClues(compareWords(guess, wordleWord), row);
+                    //start box at zero for next row
                     box = 0;  
-                    console.log('row' + row);
-                    console.log('box' + box);  
                 } 
-                
+
             } else {
                 alert ('Not enough letters');
             }
+        //backspace functionatlity, if on box 1-4    
         } else if (keyElement.textContent === 'BACKSPACE'){
             if (box > 0 && box < 6){
                 box--;
@@ -32,11 +34,14 @@ for (let keyElement of keys){
                 wordleBox.textContent = ''; 
             } 
         } else {
-            console.log('Row: '+row);
-            console.log('Box: '+box);
+            //update div with letter from keyboard
+            
+            //create divID string from row and box
             let divID = row.toString() + box.toString();
+
             let wordleBox = document.getElementById(divID);
             wordleBox.textContent = keyElement.textContent; 
+            //move to the next wordle box
             box++;
         };
         
@@ -58,10 +63,11 @@ function getWordleGuess(row){
     }
     //check if guess is in the list of wordle words
     if(checkWordleList(guess)){
-        //return the guess
+        //if in list return the guess
         return guess;
     }else {
-            alert('Not in word list');
+        //alert user that the word is not in the list
+        alert('Not in word list');
         return false;
     }  
 }
@@ -80,12 +86,23 @@ function updateClues(result, row){
         
         //depending on the results from the compare word function, update coloured squares
         if(result[i].inPosition){
+            //update box on Wordle grid to green
             box.setAttribute('class', 'green');
+
+            //update key on keyboard to green
+            let key = document.getElementById(result[i].letter.toLowerCase());
+            key.setAttribute('class', 'key-green');
+            
+            //count number of correct letters
             winner++;
         }else if(result[i].exists){
             box.setAttribute('class', 'yellow');
         }else{
             box.setAttribute('class', 'grey');
+
+            //update key on keyboard to grey
+            let key = document.getElementById(result[i].letter.toLowerCase());
+            key.setAttribute('class', 'key-grey');
         }   
     }
     //check if the game has been won
@@ -102,7 +119,6 @@ function updateClues(result, row){
     } else {
         row ++;
     }
-    console.log('other row: '+row);
     return row;
 }
 
