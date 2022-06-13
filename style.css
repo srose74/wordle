@@ -33,7 +33,7 @@ nav > ul > li::before {
 a:link { color: cornflowerblue; }
 a:visited { color: crimson; }
 
-.input {
+.input, .main-stats {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -61,7 +61,12 @@ input {
     border-style: solid;
     border-color: darkgray;
 }
-
+.played, .win-percentage {
+    display: inline;
+    text-align: center;
+    font-size: 40px;
+    margin: 5px;
+}
 .green {
     background-color:#6cac64;
     color: white;

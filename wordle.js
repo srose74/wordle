@@ -2,51 +2,92 @@
 let wordleWord = randomWordle();
 console.log (wordleWord);
 
+//Global Variables
 let row = 1;
 let box = 0;
+let lockGame = false;
+let Wins = 0;
+let Games = 0;
+
+let gameResults = [
+    {One: 0},
+    {Two: 0},
+    {Three: 0},
+    {Four: 0},
+    {Five: 0},
+    {Six: 0}
+];
 
 //Event listener for keyboard
 let keys = document.getElementsByClassName('key');
 for (let keyElement of keys){
     keyElement.addEventListener('click', function(){
-        
-        if(keyElement.textContent === 'ENTER'){
-            if (box === 5){
-                let guess = getWordleGuess(row);
+    
+        if (!lockGame){
+            if(keyElement.textContent === 'ENTER'){
+                if (box === 5){
+                    let guess = getWordleGuess(row);
 
-                if (guess){
+                    if (guess){
+                        //increment row by 1
+                        row = updateClues(compareWords(guess, wordleWord), row);
+                        //start box at zero for next row
+                        box = 0;  
+                    } 
 
-                    //increment row by 1
-                    row = updateClues(compareWords(guess, wordleWord), row);
-                    //start box at zero for next row
-                    box = 0;  
+                } else {
+                    alert ('Not enough letters');
+                }
+            //backspace functionatlity, if on box 1-4    
+            } else if (keyElement.textContent === 'BACKSPACE'){
+                if (box > 0 && box < 6){
+                    box--;
+                    let divID = row.toString() + box.toString();
+                    let wordleBox = document.getElementById(divID);
+                    wordleBox.textContent = ''; 
                 } 
-
             } else {
-                alert ('Not enough letters');
-            }
-        //backspace functionatlity, if on box 1-4    
-        } else if (keyElement.textContent === 'BACKSPACE'){
-            if (box > 0 && box < 6){
-                box--;
+                //update div with letter from keyboard
+                
+                //create divID string from row and box
                 let divID = row.toString() + box.toString();
-                let wordleBox = document.getElementById(divID);
-                wordleBox.textContent = ''; 
-            } 
-        } else {
-            //update div with letter from keyboard
-            
-            //create divID string from row and box
-            let divID = row.toString() + box.toString();
 
-            let wordleBox = document.getElementById(divID);
-            wordleBox.textContent = keyElement.textContent; 
-            //move to the next wordle box
-            box++;
-        };
-        
+                let wordleBox = document.getElementById(divID);
+                wordleBox.textContent = keyElement.textContent; 
+                //move to the next wordle box
+                box++;
+            };
+        }
     });
 }
+
+function refreshGame (){
+
+    //refresh global variables
+    row = 1;
+    box = 0;
+    lockGame = false;    
+
+    //refresh Wordle Grid
+    for (let i=1;i<7;i++){
+        for (let j=0;j<5;j++){
+            let divID = i.toString()+j.toString();
+            let wordleDiv = document.getElementById(divID);
+            wordleDiv.textContent = '';
+            wordleDiv.setAttribute('class', 'wordle-input');
+        }
+    }
+    
+    //refresh keyboard
+
+    let alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+
+    for (let letter of alphabet){
+        let keyboardKey = document.getElementById(letter);
+        keyboardKey.setAttribute('class', 'key');
+    }
+};
+
 
 //Gets the Wordle Guess from the Wordle Interface
 //Pass in the row of the wordle to get the correct round
@@ -108,14 +149,17 @@ function updateClues(result, row){
     //check if the game has been won
     if (winner === 5){
         if (row === '1'){
-            alert('You have won in ' + row + ' round.');    
+            alert('You have won in ' + row + ' round.');
+            lockGame = true;
         } else {
             alert('You have won in ' + row + ' rounds.');
+            lockGame = true;
         }
 
     //if you get to round 6 and you still haven't won, show the player the Wordle Word    
     } else if (row === '6'){
         alert ('The Wordle word was ' + wordleWord);
+        lockGame = true;
     } else {
         row ++;
     }
