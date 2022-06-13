@@ -3,6 +3,7 @@
 ## Contact Details
 
 Sarah Rose
+
 Project Link: [https://github.com/srose74/wordle]
 
 ## Interface
