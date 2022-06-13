@@ -67,7 +67,8 @@ function refreshGame (){
     //refresh global variables
     row = 1;
     box = 0;
-    lockGame = false;    
+    lockGame = false;
+    refreshWordleWord();    
 
     //refresh Wordle Grid
     for (let i=1;i<7;i++){
@@ -89,6 +90,11 @@ function refreshGame (){
     }
 };
 
+function refreshWordleWord(){
+    wordleWord = randomWordle();
+    console.log(wordleWord);
+    return wordleWord;
+}
 
 //Gets the Wordle Guess from the Wordle Interface
 //Pass in the row of the wordle to get the correct round
@@ -147,27 +153,47 @@ function updateClues(result, row){
             key.setAttribute('class', 'key-grey');
         }   
     }
+
     //check if the game has been won
     if (winner === 5){
-        
         if (row === 1){
             alert('You have won in ' + row + ' round.');
             lockGame = true;
         } else {
             alert('You have won in ' + row + ' rounds.');
             lockGame = true;
-        }  
+        }
+        updateStatistics(winner);  
     } 
 
     //if you get to round 6 and you still haven't won, show the player the Wordle Word  
     if (row === 6){
         alert ('The Wordle word was ' + wordleWord);
         lockGame = true;
+        updateStatistics(winner);
     } else {
         row ++;
     }
-    console.log(row);
+    
     return row;
+}
+
+function updateStatistics (won){
+    Games++;
+
+    if(won === 5){
+        Wins++;
+    }
+    
+    let updatePlayed = document.getElementById('update-played');
+    console.log(updatePlayed);
+    console.log(Wins);
+
+    let percentage = (Wins / Games) * 100;
+    let winPercentage = document.getElementById('update-percentage');
+    console.log(winPercentage);
+    console.log(percentage);
+   
 }
 
 //Select a random wordle word
