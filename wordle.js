@@ -31,6 +31,7 @@ for (let keyElement of keys){
                     if (guess){
                         //increment row by 1
                         row = updateClues(compareWords(guess, wordleWord), row);
+                        
                         //start box at zero for next row
                         box = 0;  
                     } 
@@ -148,21 +149,24 @@ function updateClues(result, row){
     }
     //check if the game has been won
     if (winner === 5){
-        if (row === '1'){
+        
+        if (row === 1){
             alert('You have won in ' + row + ' round.');
             lockGame = true;
         } else {
             alert('You have won in ' + row + ' rounds.');
             lockGame = true;
-        }
+        }  
+    } 
 
-    //if you get to round 6 and you still haven't won, show the player the Wordle Word    
-    } else if (row === '6'){
+    //if you get to round 6 and you still haven't won, show the player the Wordle Word  
+    if (row === 6){
         alert ('The Wordle word was ' + wordleWord);
         lockGame = true;
     } else {
         row ++;
     }
+    console.log(row);
     return row;
 }
 
