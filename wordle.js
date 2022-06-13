@@ -179,6 +179,7 @@ function updateClues(result, row){
 }
 
 function updateStatistics (won){
+    
     Games++;
 
     if(won === 5){
@@ -186,14 +187,12 @@ function updateStatistics (won){
     }
     
     let updatePlayed = document.getElementById('update-played');
-    console.log(updatePlayed);
-    console.log(Wins);
+    updatePlayed.textContent = Games;
+    
 
     let percentage = (Wins / Games) * 100;
     let winPercentage = document.getElementById('update-percentage');
-    console.log(winPercentage);
-    console.log(percentage);
-   
+    winPercentage.textContent = Math.round(percentage);
 }
 
 //Select a random wordle word
