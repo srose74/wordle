@@ -6,6 +6,29 @@ h1 {
     text-align: center;
     font-size: 50px;
 }
+
+nav > ul {
+    display: flex;
+    justify-content: center;
+    color: darkmagenta;
+    list-style: none;
+    padding-left: 0px;
+}
+
+nav > ul > li::after {
+    color: lightgrey;
+    padding-left: 2px;
+    padding-right: 2px;
+    content: " | ";
+}
+
+nav > ul > li::before {
+    color: lightgrey;
+    padding-left: 2px;
+    padding-right: 2px;
+    content: " | ";
+}
+
 .input {
     display: flex;
     align-items: center;
@@ -46,7 +69,7 @@ input {
     margin: 5px;
     border: 1px;
     border-style: solid;
-    border-color: black;
+    border-color: darkgray;
 }
 
 .yellow {
@@ -60,7 +83,7 @@ input {
     margin: 5px;
     border: 1px;
     border-style: solid;
-    border-color: black;
+    border-color: darkgray;
 }
 
 .grey {
@@ -74,7 +97,7 @@ input {
     margin: 5px;
     border: 1px;
     border-style: solid;
-    border-color: black;
+    border-color: darkgray;
 }
 
 img {
@@ -96,8 +119,8 @@ img {
     width: 50px;
     height: 70px;
     font-size: 20px;
-    background-color: lightpink;
-    color: grey;
+    background-color: purple;
+    color: black;
     border-radius: 10px;
     border-color: darkgray;
 }
@@ -117,6 +140,18 @@ img {
     background-color: gray;
     color: black;
     border-radius: 10px;
+}
+
+.main-instructions {
+    display: flex;
+    justify-content: center;
+}
+
+.instructions {
+    display: block;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    padding: 20px;
 }
 
 
