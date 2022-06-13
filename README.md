@@ -23,10 +23,15 @@ Launch link in browser: [https://srose74.github.io/wordle/]
 1. Double Letter Bug
     - When a user enters a guess with a double letter that exists in the Wordle word the correctly placed letter will be green, and the incorrectly placed letter will be yellow.
 
-## Interface
+## Interface Images
+
+1. Instructions
+
+![Wordle Instructions](/images/Wordle-instructions.jpg)
+
+2. Wordle Game
 
 ![Wordle Interface](/images/Wordle-interface.jpg)
-![Wordle Instructions](/images/Wordle-instructions.jpg)
 
 ## Version
 
