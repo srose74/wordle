@@ -16,17 +16,11 @@
         <h1>Wordle</h1>
         <nav class="navbar">
             <ul>
-                <li><a class="myBtn" href="javascript:modalInstructions()">Instructions</a></li>
+                <li><a class="instructions" href="javascript:modalInstructions()">Instructions</a></li>
                 <li><a class="refresh" href="javascript:refreshGame()">Play Again</a></li>
-                <li><a href="statistics.html">Game Statistics</a></li>
+                <li><a class="statistics" href="javascript:modalStatistic()">Game Statistics</a></li>
             </ul>
-        </nav>
-        <div class="main-stats">
-            <H2 class="played">Played</H2>
-            <div class="played" id="update-played"></div>
-            <h2 class="win-percentage">Win %</h2>
-            <div class="win-percentage" id="update-percentage"></div> 
-        </div>    
+        </nav>   
     </header>  
     <main class="main">
         <section class="Wordle-Input">
@@ -150,6 +144,27 @@
                         <h2>Play WORDLE as much as you like!</h2>
                     </div>                  
                 </div>
+
+                <div id="myModal-statistics" class="modal-statistics">
+                    <!-- Modal content -->
+                    <div class="modal-content-statistics">
+                        <span class="close-statistics">&times;</span>
+                        <div class="main-stats">
+                            <H2 class="played">Played</H2>
+                            <div class="played" id="update-played"></div>
+                            <h2 class="win-percentage">Win %</h2>
+                            <div class="win-percentage" id="update-percentage"></div>
+                        </div>
+                        <div class="graph-stats">
+                            <div class="graph" id="1">1</div>
+                            <div class="graph" id="2">2</div> 
+                            <div class="graph" id="3">3</div> 
+                            <div class="graph" id="4">4</div> 
+                            <div class="graph" id="5">5</div> 
+                            <div class="graph" id="6">6</div>  
+                        </div> 
+                    </div>
+                </div>      
         </section>
     </main>
 

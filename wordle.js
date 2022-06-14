@@ -9,14 +9,14 @@ let lockGame = false;
 let Wins = 0;
 let Games = 0;
 
-let gameResults = [
-    {One: 0},
-    {Two: 0},
-    {Three: 0},
-    {Four: 0},
-    {Five: 0},
-    {Six: 0}
-];
+let gameResults = { 
+    1: {win: 0},
+    2: {win: 0},
+    3: {win: 0},
+    4: {win: 0},
+    5: {win: 0},
+    6: {win: 0}
+}
 
 //Event listener for keyboard
 let keys = document.getElementsByClassName('key');
@@ -76,7 +76,17 @@ span.onclick = function () {
 }
 
 //Game Statistics Modal
+let modalStatistics = document.getElementById('myModal-statistics');
+let spanStatistics = document.getElementsByClassName('close-statistics')[0];
 
+function modalStatistic (){
+    modalStatistics.style.display = 'block';    
+};
+
+//When user clicks on X to close the Modal
+spanStatistics.onclick = function () {
+    modalStatistics.style.display = 'none';
+}
 
 
 function refreshGame (){
@@ -98,13 +108,20 @@ function refreshGame (){
     }
     
     //refresh keyboard
-
     let alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
     for (let letter of alphabet){
         let keyboardKey = document.getElementById(letter);
         keyboardKey.setAttribute('class', 'key');
     }
+
+    //refresh bar graph colors
+    for (let i=1;i<7;i++){
+        let updateGraph = document.getElementById(i.toString());
+        updateGraph.setAttribute('class', 'graph');
+    }
+
+
 };
 
 function refreshWordleWord(){
@@ -175,41 +192,78 @@ function updateClues(result, row){
     if (winner === 5){
         if (row === 1){
             alert('You have won in ' + row + ' round.');
+            
+            //lock game until the board is refreshed
             lockGame = true;
+
+            //update gameResults
+            gameResults['1'].win++;
+        
+            //Open Modal Statistics Page
+            modalStatistic ();
         } else {
+
             alert('You have won in ' + row + ' rounds.');
+
+            //update gameResults
+            gameResults[row.toString()].win++;
+            
+            //lock game until the board is refreshed
             lockGame = true;
+            //Open Modal Statistics Page
+            modalStatistic ();
         }
-        updateStatistics(winner);  
+
+        //update statistics board
+        updateStatistics(winner, row);  
     } 
 
     //if you get to round 6 and you still haven't won, show the player the Wordle Word  
     if (row === 6){
         alert ('The Wordle word was ' + wordleWord);
+
+        //Lock the game until the board is refreshed
         lockGame = true;
-        updateStatistics(winner);
+
+        //Update statistics page
+        updateStatistics(winner, row);
+        //Open Modal Statistics Page
+        modalStatistic ();
     } else {
+        //play another row
         row ++;
     }
-    
     return row;
 }
 
-function updateStatistics (won){
-    
+function updateStatistics (won, row){
+    //increment the number of games played
     Games++;
 
     if(won === 5){
+        //if a winning game, update the number of wins
         Wins++;
     }
     
+    //update Statistics Modal with No# of games
     let updatePlayed = document.getElementById('update-played');
     updatePlayed.textContent = Games;
     
-
+    //update Statistics Modal with % wins
     let percentage = (Wins / Games) * 100;
     let winPercentage = document.getElementById('update-percentage');
     winPercentage.textContent = Math.round(percentage);
+
+    //update Statistics Modal with Graph
+    let winningRow = document.getElementById(row.toString());
+    winningRow.setAttribute('class', 'graph-winner ');
+
+    for (let i=1;i<7;i++){
+        percentage = (gameResults[i.toString()].win / Games) * 100;
+        let updateGraph = document.getElementById(i.toString());
+        updateGraph.style.width = percentage + '%';
+        updateGraph.textContent = i.toString()+': ' + Math.round(percentage) + '%';
+    }
 }
 
 //Select a random wordle word
