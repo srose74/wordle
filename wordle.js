@@ -262,7 +262,6 @@ function updateStatistics (won, row){
         percentage = (gameResults[i.toString()].win / Games) * 100;
         let updateGraph = document.getElementById(i.toString());
         updateGraph.style.width = percentage + '%';
-        updateGraph.textContent = i.toString()+': ' + Math.round(percentage) + '%';
     }
 }
 
