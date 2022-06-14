@@ -62,6 +62,23 @@ for (let keyElement of keys){
     });
 }
 
+//Instructions Modal
+let modal = document.getElementById('myModal');
+let span = document.getElementsByClassName('close')[0];
+
+function modalInstructions (){
+    modal.style.display = 'block';    
+};
+
+//When user clicks on X to close the Modal
+span.onclick = function () {
+    modal.style.display = 'none';
+}
+
+//Game Statistics Modal
+
+
+
 function refreshGame (){
 
     //refresh global variables
