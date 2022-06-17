@@ -201,6 +201,7 @@ function updateClues(result, row){
         
             //Open Modal Statistics Page
             modalStatistic ();
+            
         } else {
 
             alert('You have won in ' + row + ' rounds.');
